@@ -1,0 +1,13 @@
+# Dependencias y build
+node_modules
+dist
+
+# Variables de entorno (nunca commitear)
+.env
+.env.local
+.env.*.local
+
+# Logs y sistema
+.DS_Store
+*.log
+coverage
