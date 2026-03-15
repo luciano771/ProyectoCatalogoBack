@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.categoryRouter = void 0;
+const express_1 = require("express");
+const category_controller_1 = require("../controllers/category.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const asyncHandler_1 = require("../utils/asyncHandler");
+exports.categoryRouter = (0, express_1.Router)();
+exports.categoryRouter.get('/', auth_middleware_1.requireAuth, (0, auth_middleware_1.requireRole)('MERCHANT', 'ADMIN'), (0, asyncHandler_1.asyncHandler)(category_controller_1.listCategoriesHandler));
+exports.categoryRouter.post('/', auth_middleware_1.requireAuth, (0, auth_middleware_1.requireRole)('MERCHANT', 'ADMIN'), (0, asyncHandler_1.asyncHandler)(category_controller_1.createCategoryHandler));
+exports.categoryRouter.put('/:id', auth_middleware_1.requireAuth, (0, auth_middleware_1.requireRole)('MERCHANT', 'ADMIN'), (0, asyncHandler_1.asyncHandler)(category_controller_1.updateCategoryHandler));
+exports.categoryRouter.delete('/:id', auth_middleware_1.requireAuth, (0, auth_middleware_1.requireRole)('MERCHANT', 'ADMIN'), (0, asyncHandler_1.asyncHandler)(category_controller_1.deleteCategoryHandler));

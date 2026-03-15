@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.merchantRouter = void 0;
+const express_1 = require("express");
+const merchant_controller_1 = require("../controllers/merchant.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const upload_middleware_1 = require("../middlewares/upload.middleware");
+const asyncHandler_1 = require("../utils/asyncHandler");
+exports.merchantRouter = (0, express_1.Router)();
+exports.merchantRouter.get('/profile', auth_middleware_1.requireAuth, (0, auth_middleware_1.requireRole)('MERCHANT', 'ADMIN'), (0, asyncHandler_1.asyncHandler)(merchant_controller_1.getMyMerchantProfileHandler));
+exports.merchantRouter.put('/profile', auth_middleware_1.requireAuth, (0, auth_middleware_1.requireRole)('MERCHANT', 'ADMIN'), (0, asyncHandler_1.asyncHandler)(merchant_controller_1.updateMyMerchantProfileHandler));
+exports.merchantRouter.post('/profile/logo', auth_middleware_1.requireAuth, (0, auth_middleware_1.requireRole)('MERCHANT', 'ADMIN'), upload_middleware_1.uploadImage, (0, asyncHandler_1.asyncHandler)(merchant_controller_1.uploadLogoHandler));
+exports.merchantRouter.post('/profile/banner', auth_middleware_1.requireAuth, (0, auth_middleware_1.requireRole)('MERCHANT', 'ADMIN'), upload_middleware_1.uploadImage, (0, asyncHandler_1.asyncHandler)(merchant_controller_1.uploadBannerHandler));
